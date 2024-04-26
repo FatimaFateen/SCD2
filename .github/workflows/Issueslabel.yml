@@ -1,0 +1,32 @@
+name: Label Issues
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  label:
+    runs-on: windows-latest
+    steps:
+      - name: Check if the issue title contains "bug"
+        id: check_bug
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const containsBug = /\\bbug\\b/i.test(context.payload.issue.title);
+            console.log('Contains bug:', containsBug);
+            return containsBug;
+
+      - name: Add label if issue is a bug
+        if: steps.check_bug.outputs.containsBug == 'true'
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['bug']
+            });
