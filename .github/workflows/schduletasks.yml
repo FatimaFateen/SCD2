@@ -1,0 +1,27 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+
+jobs:
+  run-tasks:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Execute Scheduled Tasks
+        run: |
+          echo "Running scheduled tasks..."
+          # Example: Run a backup script
+          echo "Backing up data..."
+          mkdir backups
+          cp -r data/* backups/
+          # Run a maintenance script
+          echo "Performing maintenance..."
+          ./maintenance_script.sh
+          # Send email notification
+          echo "Sending notification..."
+          echo "Scheduled tasks executed successfully." | mail -s "Scheduled Tasks Report" user@example.com
