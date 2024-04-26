@@ -2,7 +2,7 @@ const request = require("request");
 const cheerio = require("cheerio");
 const fs = require("fs");
 const utils = require("./utils");
-
+console.log("I'm Fatima");
 const eventsIridium = ["brightness", "altitude", "azimuth", "satellite", "distanceToFlareCentre", "brightnessAtFlareCentre", "date", "time", "distanceToSatellite", "AngleOffFlareCentre-line", "flareProducingAntenna", "sunAltitude", "angularSeparationFromSun", "image", "id"];
 
 function getTable(config) {
