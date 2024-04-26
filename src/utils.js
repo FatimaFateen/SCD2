@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+console.log("Yoooooooooooo");
 
 function getTimestamp(time) {
 	const arr = time.split(":");
